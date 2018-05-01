@@ -28,7 +28,7 @@ namespace Akyuu.UI {
             DataContext = this;
 
             Images = from t in Utils.ListImageFiles(Config.ScreenshotPath)
-                     select Screenshot.FromPath(t);
+                     select Screenshot.FromFile(t);
         }
 
         private void Browser_OpenScreenshot(object sender, Components.OpenScreenshotEventArgs e) {

@@ -44,6 +44,11 @@ namespace Akyuu.UI {
             }
         }
 
+        private void Browser_OpenScreenshot(object sender, Components.OpenScreenshotEventArgs e) {
+            var window = new ImageViewWindow(e.Screenshot);
+            window.ShowDialog(Application.Current.MainWindow);
+        }
+
         private void TagSearch_Click(object sender, RoutedEventArgs e) {
             var tagName = from t in Tags
                           where t.Selected
@@ -62,9 +67,16 @@ namespace Akyuu.UI {
             }
         }
 
-        private void Browser_OpenScreenshot(object sender, Components.OpenScreenshotEventArgs e) {
-            var window = new ImageViewWindow(e.Screenshot);
-            window.ShowDialog(Application.Current.MainWindow);
+        private void ShowUntagged_Click(object sender, RoutedEventArgs e) {
+            var files = Utils.ListImageFiles(Config.Current.ScreenshotPath);
+
+            using(var ctx = AkyuuContext.Create()) {
+                var tagged = (from t in ctx.ScreenshotTags
+                              select t.File).Distinct();
+
+                lsBrowser.ItemsSource = from t in files.Except(tagged)
+                                        select Screenshot.FromFile(t);
+            }
         }
     }
 }

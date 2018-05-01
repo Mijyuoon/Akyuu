@@ -27,6 +27,8 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="4"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="4"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <ListBox Grid.Row="0" ItemsSource="{Binding Tags}">
@@ -47,6 +49,8 @@
                 </ListBox>
 
                 <Button Grid.Row="2" Padding="4" Content="Search..." Click="TagSearch_Click"/>
+
+                <Button Grid.Row="4" Padding="4" Content="Show Untagged" Click="ShowUntagged_Click"/>
             </Grid>
         </GroupBox>
 

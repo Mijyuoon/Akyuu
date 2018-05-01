@@ -16,7 +16,7 @@ namespace Akyuu.Misc {
         public static IEnumerable<string> ListImageFiles(string path) =>
             from t in Directory.EnumerateFiles(path, "*.*")
             where imageExtensions.Contains(Path.GetExtension(t))
-            select t;
+            select Path.GetFileName(t);
     }
 
     public static class Extensions {
