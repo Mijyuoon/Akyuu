@@ -1,0 +1,28 @@
+﻿<Page x:Class="Akyuu.UI.TagListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Akyuu.UI"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock  Grid.Row="0" Text="Tag list:" Style="{StaticResource HeaderLabel}"/>
+
+        <DataGrid Grid.Row="2" ItemsSource="{Binding Tags}"
+                  AutoGenerateColumns="False" IsReadOnly="True"
+                  SelectionMode="Single" SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Tag Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="File Count" Binding="{Binding Count}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

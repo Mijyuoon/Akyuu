@@ -1,0 +1,13 @@
+﻿<Application x:Class="Akyuu.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Akyuu"
+             StartupUri="UI/MainWindow.xaml"
+             Startup="App_Startup"
+             Exit="App_Exit">
+    <Application.Resources>
+        <Style x:Key="HeaderLabel" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </Application.Resources>
+</Application>

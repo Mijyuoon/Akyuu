@@ -1,0 +1,45 @@
+﻿<Window x:Class="Akyuu.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:data="clr-namespace:Akyuu.Models"
+        mc:Ignorable="d"
+        Height="500" Width="700"
+        Title="Akyuu">
+
+    <Window.Resources>
+        <data:NavigationPageList x:Key="Pages">
+            <data:NavigationPage Title="Screenshot Search" Uri="SearchPage.xaml"/>
+            <data:NavigationPage Title="Browse..." Uri="BrowsePage.xaml"/>
+            <data:NavigationPage Title="Tag List" Uri="TagListPage.xaml"/>
+            <data:NavigationPage Title="Settings" Uri="SettingsPage.xaml"/>
+        </data:NavigationPageList>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Frame x:Name="PageView" Grid.Row="0" NavigationUIVisibility="Hidden"/>
+
+        <GroupBox Grid.Row="1" Header="Pages">
+            <ItemsControl Margin="2" ItemsSource="{StaticResource Pages}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Margin="0,0,4,0" Padding="4" Content="{Binding Title}"
+                                Command="{Binding SelectPageCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                CommandParameter="{Binding}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </GroupBox>
+    </Grid>
+</Window>

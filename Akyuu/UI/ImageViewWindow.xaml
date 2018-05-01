@@ -1,0 +1,64 @@
+﻿<Window x:Class="Akyuu.UI.ImageViewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Akyuu.UI"
+        mc:Ignorable="d"
+        Height="450" Width="800"
+        WindowStartupLocation="CenterOwner"
+        Title="Akyuu – Image View">
+    
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Column="0" StretchDirection="DownOnly" Source="{Binding Screenshot.Source}"
+               RenderOptions.BitmapScalingMode="HighQuality"/>
+
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
+
+        <Grid Grid.Column="2" Margin="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <GroupBox Grid.Row="0" Header="Tags">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="4"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="4"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ListBox x:Name="lsTags" Grid.Row="0" ItemsSource="{Binding Tags}">
+                        <ListBox.Resources>
+                            <ContextMenu x:Key="TagItemMenu">
+                                <MenuItem Header="Remove" Click="RemoveTags_Click"/>
+                            </ContextMenu>
+                        </ListBox.Resources>
+
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="ContextMenu" Value="{StaticResource TagItemMenu}"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding TagName}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <Button Grid.Row="4" Padding="4" Content="Add new..." Click="AddTags_Click"/>
+                </Grid>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</Window>
