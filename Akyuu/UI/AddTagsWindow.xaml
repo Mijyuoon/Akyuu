@@ -8,7 +8,8 @@
         Height="200" Width="300"
         WindowStartupLocation="CenterOwner"
         Title="Akyuu – Add tags..."
-        Closing="Window_Closing">
+        Closing="Window_Closing"
+        KeyDown="Window_KeyDown">
     
     <Grid Margin="10">
         <Grid.RowDefinitions>

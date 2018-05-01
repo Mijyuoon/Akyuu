@@ -31,14 +31,9 @@ namespace Akyuu.UI {
                      select Screenshot.FromPath(t);
         }
 
-        private void Browser_DoubleClick(object sender, MouseButtonEventArgs e) {
-            if(e.LeftButton != MouseButtonState.Pressed) return;
-
-            var item = sender as ListBoxItem;
-            if(item.Content is Screenshot data) {
-                var window = new ImageViewWindow(data);
-                window.ShowDialog(Application.Current.MainWindow);
-            }
+        private void Browser_OpenScreenshot(object sender, Components.OpenScreenshotEventArgs e) {
+            var window = new ImageViewWindow(e.Screenshot);
+            window.ShowDialog(Application.Current.MainWindow);
         }
     }
 }

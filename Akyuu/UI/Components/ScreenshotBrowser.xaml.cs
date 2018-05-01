@@ -15,6 +15,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Akyuu.UI.Components {
+    public class OpenScreenshotEventArgs : EventArgs {
+        public Screenshot Screenshot { get; }
+
+        public OpenScreenshotEventArgs(Screenshot screenshot) {
+            Screenshot = screenshot;
+        }
+    }
+
     public partial class ScreenshotBrowser : UserControl {
         public IEnumerable<Screenshot> ItemsSource {
             get { return (IEnumerable<Screenshot>)GetValue(ItemsSourceProperty); }
@@ -32,14 +40,28 @@ namespace Akyuu.UI.Components {
         public static readonly DependencyProperty ThumbnailSizeProperty =
             DependencyProperty.Register("ThumbnailSize", typeof(int), typeof(ScreenshotBrowser), new PropertyMetadata(64));
 
-        public event MouseButtonEventHandler ItemDoubleClick;
+        public event EventHandler<OpenScreenshotEventArgs> OpenScreenshot;
 
         public ScreenshotBrowser() {
             InitializeComponent();
         }
 
         private void Browser_DoubleClick(object sender, MouseButtonEventArgs e) {
-            ItemDoubleClick?.Invoke(sender, e);
+            if(e.LeftButton != MouseButtonState.Pressed) return;
+
+            var item = sender as ListBoxItem;
+            if(item.Content is Screenshot data) {
+                OpenScreenshot?.Invoke(this, new OpenScreenshotEventArgs(data));
+            }
+        }
+
+        private void Browser_KeyDown(object sender, KeyEventArgs e) {
+            if(e.Key != Key.Enter) return;
+
+            var item = sender as ListBoxItem;
+            if(item.Content is Screenshot data) {
+                OpenScreenshot?.Invoke(this, new OpenScreenshotEventArgs(data));
+            }
         }
     }
 }

@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Height="450" Width="800"
         WindowStartupLocation="CenterOwner"
-        Title="Akyuu – Image View">
+        Title="Akyuu – Image View"
+        KeyDown="Window_KeyDown">
     
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
@@ -39,7 +40,7 @@
                     <ListBox x:Name="lsTags" Grid.Row="0" ItemsSource="{Binding Tags}">
                         <ListBox.Resources>
                             <ContextMenu x:Key="TagItemMenu">
-                                <MenuItem Header="Remove" Click="RemoveTags_Click"/>
+                                <MenuItem Header="Remove (Del)" Click="RemoveTags_Click"/>
                             </ContextMenu>
                         </ListBox.Resources>
 
@@ -56,7 +57,7 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
 
-                    <Button Grid.Row="4" Padding="4" Content="Add new..." Click="AddTags_Click"/>
+                    <Button Grid.Row="4" Padding="4" Content="Add new... (N)" Click="AddTags_Click"/>
                 </Grid>
             </GroupBox>
         </Grid>

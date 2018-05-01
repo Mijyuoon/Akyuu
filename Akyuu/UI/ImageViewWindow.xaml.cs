@@ -37,9 +37,11 @@ namespace Akyuu.UI {
                            select t;
                 Tags = new ObservableCollection<ScreenshotTag>(tags);
             }
+
+            lsTags.Focus();
         }
 
-        private void AddTags_Click(object sender, RoutedEventArgs e) {
+        private void AddTags() {
             var window = new AddTagsWindow(Screenshot.File);
             if(window.ShowDialog(this) is true) {
                 using(var ctx = new AkyuuContext()) {
@@ -47,12 +49,12 @@ namespace Akyuu.UI {
 
                     ctx.SaveChanges();
                 }
-                
+
                 foreach(var tag in window.Tags) Tags.Add(tag);
             }
         }
 
-        private void RemoveTags_Click(object sender, RoutedEventArgs e) {
+        private void RemoveTags() {
             if(lsTags.SelectedItem is ScreenshotTag tag) {
                 using(var ctx = new AkyuuContext()) {
                     ctx.ScreenshotTags.Attach(tag);
@@ -62,6 +64,28 @@ namespace Akyuu.UI {
                 }
 
                 Tags.Remove(tag);
+            }
+        }
+
+        private void AddTags_Click(object sender, RoutedEventArgs e) {
+            AddTags();
+        }
+
+        private void RemoveTags_Click(object sender, RoutedEventArgs e) {
+            RemoveTags();
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e) {
+            switch(e.Key) {
+            case Key.Escape:
+                Close();
+                break;
+            case Key.N:
+                AddTags();
+                break;
+            case Key.Delete:
+                RemoveTags();
+                break;
             }
         }
     }

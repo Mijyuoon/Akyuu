@@ -28,6 +28,7 @@
         <ListBox.ItemContainerStyle>
             <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
                 <EventSetter Event="MouseDoubleClick" Handler="Browser_DoubleClick"/>
+                <EventSetter Event="KeyDown" Handler="Browser_KeyDown"/>
             </Style>
         </ListBox.ItemContainerStyle>
     </ListBox>
