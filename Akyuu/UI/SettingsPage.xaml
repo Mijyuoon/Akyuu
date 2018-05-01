@@ -28,6 +28,6 @@
         <akyuu:FilePickerBox Grid.Row="2" Grid.Column="2" PickFolders="True" FilePath="{Binding Config.ScreenshotPath}"/>
 
         <TextBlock Grid.Row="4" Grid.Column="0" Text="Thumbnail size:"/>
-        <xctk:IntegerUpDown Grid.Row="4" Grid.Column="2" Minimum="16" Maximum="256" Increment="4" Value="{Binding Config.ThumbnailSize}"/>
+        <akyuu:NumericUpDown Grid.Row="4" Grid.Column="2" MinValue="16" MaxValue="256" Step="4" Value="{Binding Config.ThumbnailSize}"/>
     </Grid>
 </Page>
