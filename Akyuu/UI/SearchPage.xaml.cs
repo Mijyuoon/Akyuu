@@ -51,16 +51,13 @@ namespace Akyuu.UI {
             int tagCount = tagName.Count();
 
             using(var ctx = new AkyuuContext()) {
-                // How the actual f**k does this even work? o_0
-                var images = from t in ctx.ScreenshotTags
-                             group t by t.File into g
-                             from gt in g join m in tagName
-                             on gt.TagName equals m
-                             group gt by gt.File into gk
-                             where gk.Count() == tagCount
-                             select gk.Key;
+                var files = from t in ctx.ScreenshotTags
+                            where tagName.Contains(t.TagName)
+                            group t by t.File into g
+                            where g.Count() >= tagCount
+                            select g.Key;
 
-                lsBrowser.ItemsSource = from t in images.ToList()
+                lsBrowser.ItemsSource = from t in files.ToList()
                                         select Screenshot.FromFile(t);
             }
         }
