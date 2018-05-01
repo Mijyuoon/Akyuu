@@ -29,6 +29,7 @@ namespace Akyuu {
                 };
             }
 
+            Directory.CreateDirectory(Config.ScreenshotPath);
             Data.AkyuuContext.CreateDatabaseIfNotExists();
         }
 
