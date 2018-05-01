@@ -30,7 +30,7 @@ namespace Akyuu.UI {
 
             Screenshot = screenshot;
 
-            using(var ctx = new AkyuuContext()) {
+            using(var ctx = AkyuuContext.Create()) {
                 var tags = from t in ctx.ScreenshotTags
                            where t.File == screenshot.File
                            orderby t.TagName
@@ -44,7 +44,7 @@ namespace Akyuu.UI {
         private void AddTags() {
             var window = new AddTagsWindow(Screenshot.File);
             if(window.ShowDialog(this) is true) {
-                using(var ctx = new AkyuuContext()) {
+                using(var ctx = AkyuuContext.Create()) {
                     ctx.ScreenshotTags.AddRange(window.Tags);
 
                     ctx.SaveChanges();
@@ -56,7 +56,7 @@ namespace Akyuu.UI {
 
         private void RemoveTags() {
             if(lsTags.SelectedItem is ScreenshotTag tag) {
-                using(var ctx = new AkyuuContext()) {
+                using(var ctx = AkyuuContext.Create()) {
                     ctx.ScreenshotTags.Attach(tag);
                     ctx.ScreenshotTags.Remove(tag);
 

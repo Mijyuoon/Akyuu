@@ -23,7 +23,7 @@ namespace Akyuu.UI {
             InitializeComponent();
             DataContext = this;
 
-            using(var ctx = new AkyuuContext()) {
+            using(var ctx = AkyuuContext.Create()) {
                 Tags = (from t in ctx.ScreenshotTags
                        group t by t.TagName into g
                        orderby g.Key

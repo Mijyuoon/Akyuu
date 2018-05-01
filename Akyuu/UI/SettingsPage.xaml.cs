@@ -1,6 +1,8 @@
 ﻿using Akyuu.Data;
+using Akyuu.UI.Components;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,10 +23,6 @@ namespace Akyuu.UI {
         public SettingsPage() {
             InitializeComponent();
             DataContext = this;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e) {
-            
         }
     }
 }

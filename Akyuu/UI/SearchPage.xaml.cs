@@ -25,7 +25,7 @@ namespace Akyuu.UI {
             InitializeComponent();
             DataContext = this;
 
-            using(var ctx = new AkyuuContext()) {
+            using(var ctx = AkyuuContext.Create()) {
                 Tags = (from t in ctx.ScreenshotTags
                         group t by t.TagName into g
                         orderby g.Key
@@ -50,7 +50,7 @@ namespace Akyuu.UI {
                           select t.Name;
             int tagCount = tagName.Count();
 
-            using(var ctx = new AkyuuContext()) {
+            using(var ctx = AkyuuContext.Create()) {
                 var files = from t in ctx.ScreenshotTags
                             where tagName.Contains(t.TagName)
                             group t by t.File into g

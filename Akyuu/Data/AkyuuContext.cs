@@ -14,7 +14,7 @@ namespace Akyuu.Data {
     public class AkyuuContext : DbContext {
         public static readonly string DbName = "AkyuuData.db";
 
-        public AkyuuContext() : base(new SQLiteConnection {
+        private AkyuuContext() : base(new SQLiteConnection {
             ConnectionString = MakeConnectionString(),
         }, true) {
             // Idk
@@ -34,13 +34,17 @@ namespace Akyuu.Data {
             return conn.ConnectionString;
         }
 
-        public static void CreateDatabaseIfNotExists() {
-            string path = Path.Combine(Config.Current.ScreenshotPath, DbName);
-            if(File.Exists(path)) return;
+        public static AkyuuContext Create() {
+            Directory.CreateDirectory(Config.Current.ScreenshotPath);
 
-            using(var ctx = new AkyuuContext()) {
-                ctx.Database.ExecuteSqlCommand(Properties.Resources.DatabaseSchema);
+            var context = new AkyuuContext();
+
+            string path = Path.Combine(Config.Current.ScreenshotPath, DbName);
+            if(!File.Exists(path)) {
+                context.Database.ExecuteSqlCommand(Properties.Resources.DatabaseSchema);
             }
+
+            return context;
         }
 
         public DbSet<ScreenshotTag> ScreenshotTags { get; set; }

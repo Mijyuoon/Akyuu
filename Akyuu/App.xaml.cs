@@ -28,9 +28,6 @@ namespace Akyuu {
                     ThumbnailSize = 64,
                 };
             }
-
-            Directory.CreateDirectory(Config.ScreenshotPath);
-            Data.AkyuuContext.CreateDatabaseIfNotExists();
         }
 
         private void App_Exit(object sender, ExitEventArgs e) {
