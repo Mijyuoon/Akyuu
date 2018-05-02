@@ -24,6 +24,8 @@
         <GroupBox Grid.Row="2" Grid.Column="0" Header="Find by tags">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="4"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="4"/>
                     <RowDefinition Height="Auto"/>
@@ -31,7 +33,9 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <ListBox Grid.Row="0" ItemsSource="{Binding Tags}">
+                <TextBox Grid.Row="0" TextChanged="TagsFilter_TextChanged"/>
+
+                <ListBox x:Name="lsTagList" Grid.Row="2">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -48,9 +52,9 @@
                     </ListBox.ItemContainerStyle>
                 </ListBox>
 
-                <Button Grid.Row="2" Padding="4" Content="Search..." Click="TagSearch_Click"/>
+                <Button Grid.Row="4" Padding="4" Content="Search..." Click="TagSearch_Click"/>
 
-                <Button Grid.Row="4" Padding="4" Content="Show Untagged" Click="ShowUntagged_Click"/>
+                <Button Grid.Row="6" Padding="4" Content="Show Untagged" Click="ShowUntagged_Click"/>
             </Grid>
         </GroupBox>
 

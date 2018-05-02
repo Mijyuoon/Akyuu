@@ -19,19 +19,21 @@ using System.Windows.Shapes;
 
 namespace Akyuu.UI {
     public partial class SearchPage : Page {
-        public IEnumerable<TagInfo> Tags { get; }
+        private IEnumerable<TagInfo> allTags;
 
         public SearchPage() {
             InitializeComponent();
             DataContext = this;
 
             using(var ctx = AkyuuContext.Create()) {
-                Tags = (from t in ctx.ScreenshotTags
-                        group t by t.TagName into g
-                        orderby g.Key
-                        select new TagInfo {
-                            Name = g.Key,
-                        }).ToList();
+                allTags = (from t in ctx.ScreenshotTags
+                           group t by t.TagName into g
+                           orderby g.Key
+                           select new TagInfo {
+                               Name = g.Key,
+                           }).ToList();
+
+                lsTagList.ItemsSource = allTags;
             }
         }
 
@@ -50,7 +52,7 @@ namespace Akyuu.UI {
         }
 
         private void TagSearch_Click(object sender, RoutedEventArgs e) {
-            var tagName = from t in Tags
+            var tagName = from t in allTags
                           where t.Selected
                           select t.Name;
             int tagCount = tagName.Count();
@@ -77,6 +79,14 @@ namespace Akyuu.UI {
                 lsBrowser.ItemsSource = from t in files.Except(tagged)
                                         select Screenshot.FromFile(t);
             }
+        }
+
+        private void TagsFilter_TextChanged(object sender, TextChangedEventArgs e) {
+            var text = (sender as TextBox).Text;
+
+            lsTagList.ItemsSource = from t in allTags
+                                    where t.Name.Contains(text)
+                                    select t;
         }
     }
 }
