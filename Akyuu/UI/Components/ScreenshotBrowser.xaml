@@ -18,8 +18,8 @@
             <DataTemplate>
                 <StackPanel Orientation="Horizontal">
                     <Image Margin="0,0,10,0" Source="{Binding Source}"
-                               Width="{Binding ThumbnailSize, ElementName=root}"
-                               Height="{Binding ThumbnailSize, ElementName=root}"/>
+                           Width="{Binding ThumbnailSize, ElementName=root}"
+                           Height="{Binding ThumbnailSize, ElementName=root}"/>
                     <TextBlock Text="{Binding File}" VerticalAlignment="Center"/>
                 </StackPanel>
             </DataTemplate>

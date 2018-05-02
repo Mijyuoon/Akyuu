@@ -1,4 +1,5 @@
 ﻿using Akyuu.Data;
+using Akyuu.Models;
 using Akyuu.UI.Components;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ using System.Windows.Shapes;
 
 namespace Akyuu.UI {
     public partial class SettingsPage : Page {
-        public Models.Config Config => Models.Config.Current;
+        public Config Config => Config.Current;
 
         public SettingsPage() {
             InitializeComponent();

@@ -33,6 +33,7 @@ namespace Akyuu.UI.Components {
             newValue = Math.Max(newValue, control.MinValue);
 
             control._Text = $"{newValue}";
+            control._Valid = true;
         }
 
         public int MinValue {
@@ -79,13 +80,6 @@ namespace Akyuu.UI.Components {
             get { return (bool)GetValue(_ValidProperty); }
             set { SetValue(_ValidProperty, value); }
         }
-
-        /*
-        private static readonly DependencyPropertyKey _ValidPropertyKey =
-            DependencyProperty.RegisterReadOnly("_Valid", typeof(bool), typeof(NumericUpDown), new PropertyMetadata(true));
-
-        public static readonly DependencyProperty _ValidProperty = _ValidPropertyKey.DependencyProperty;
-        */
 
         private static readonly DependencyProperty _ValidProperty =
             DependencyProperty.Register("_Valid", typeof(bool), typeof(NumericUpDown), new PropertyMetadata(true));

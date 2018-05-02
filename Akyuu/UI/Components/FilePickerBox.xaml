@@ -12,7 +12,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox Grid.Column="0" Padding="0,1" Text="{Binding FilePath, ElementName=root}"/>
-        <Button Grid.Column="1" Padding="4,1" Margin="4,0,0,0" Content="..." Click="Browse_Click"/>
+        <TextBox Grid.Column="0" Padding="0,2" Text="{Binding FilePath, ElementName=root}"/>
+        <Button Grid.Column="1" Padding="4,2" Margin="4,0,0,0" Content="..." Click="Browse_Click"/>
     </Grid>
 </UserControl>
