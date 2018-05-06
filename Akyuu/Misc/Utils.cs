@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Akyuu.Misc {
     public static class Utils {
@@ -23,6 +24,10 @@ namespace Akyuu.Misc {
         public static bool? ShowDialog(this Window window, Window owner) {
             window.Owner = owner;
             return window.ShowDialog();
+        }
+
+        public static bool HasModifier(this KeyEventArgs e, ModifierKeys modifier) {
+            return (e.KeyboardDevice.Modifiers & modifier) == modifier;
         }
     }
 }
