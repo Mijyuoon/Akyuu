@@ -29,8 +29,16 @@
             <Run Text="File:"/>
             <Run Text="{Binding File, Mode=OneTime}"/>
         </TextBlock>
-        
-        <TextBox x:Name="txTag" Grid.Row="2" Grid.Column="0" KeyDown="Entry_KeyDown"/>
+
+        <TextBox x:Name="txTag" Grid.Row="2" Grid.Column="0" KeyDown="Entry_KeyDown">
+            <TextBox.ToolTip>
+                <TextBlock>
+                    Enter – Add current text as new tag
+                    <LineBreak/>
+                    Ctrl+D – Remove last added tag
+                </TextBlock>
+            </TextBox.ToolTip>
+        </TextBox>
         <Button Grid.Row="2" Grid.Column="2" Content="Add..." Click="Add_Click"/>
 
         <ListBox x:Name="lsTags" Grid.Row="4" Grid.ColumnSpan="3" ItemsSource="{Binding Tags}">
