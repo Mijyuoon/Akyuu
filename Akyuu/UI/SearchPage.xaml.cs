@@ -39,6 +39,7 @@ namespace Akyuu.UI {
 
         private void TagList_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
             if(e.LeftButton != MouseButtonState.Pressed) return;
+            e.Handled = true;
 
             var item = sender as ListBoxItem;
             if(item.Content is TagInfo data) {

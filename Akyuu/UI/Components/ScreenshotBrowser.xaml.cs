@@ -48,6 +48,7 @@ namespace Akyuu.UI.Components {
 
         private void Browser_DoubleClick(object sender, MouseButtonEventArgs e) {
             if(e.LeftButton != MouseButtonState.Pressed) return;
+            e.Handled = true;
 
             var item = sender as ListBoxItem;
             if(item.Content is Screenshot data) {
@@ -57,6 +58,7 @@ namespace Akyuu.UI.Components {
 
         private void Browser_KeyDown(object sender, KeyEventArgs e) {
             if(e.Key != Key.Enter) return;
+            e.Handled = true;
 
             var item = sender as ListBoxItem;
             if(item.Content is Screenshot data) {

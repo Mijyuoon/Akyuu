@@ -46,11 +46,12 @@ namespace Akyuu.UI {
             if(window.ShowDialog(this) is true) {
                 using(var ctx = AkyuuContext.Create()) {
                     ctx.ScreenshotTags.AddRange(window.Tags);
-
                     ctx.SaveChanges();
                 }
 
-                foreach(var tag in window.Tags) Tags.Add(tag);
+                foreach(var tag in window.Tags) {
+                    Tags.Add(tag);
+                }
             }
         }
 
@@ -59,7 +60,6 @@ namespace Akyuu.UI {
                 using(var ctx = AkyuuContext.Create()) {
                     ctx.ScreenshotTags.Attach(tag);
                     ctx.ScreenshotTags.Remove(tag);
-
                     ctx.SaveChanges();
                 }
 
@@ -79,12 +79,15 @@ namespace Akyuu.UI {
             switch(e.Key) {
             case Key.Escape:
                 Close();
+                e.Handled = true;
                 break;
             case Key.N:
                 AddTags();
+                e.Handled = true;
                 break;
             case Key.Delete:
                 RemoveTags();
+                e.Handled = true;
                 break;
             }
         }

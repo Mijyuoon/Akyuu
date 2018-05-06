@@ -48,10 +48,14 @@ namespace Akyuu.UI {
         }
 
         private void Entry_KeyDown(object sender, KeyEventArgs e) {
-            if(e.Key == Key.Enter) AddNewTag();
+            if(e.Key == Key.Enter) {
+                AddNewTag();
+                e.Handled = true;
+            }
 
             if(e.Key == Key.D && e.HasModifier(ModifierKeys.Control)) {
                 Tags.Remove(Tags.Last());
+                e.Handled = true;
             }
         }
 
@@ -81,7 +85,10 @@ namespace Akyuu.UI {
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e) {
-            if(e.Key == Key.Escape) Close();
+            if(e.Key == Key.Escape) {
+                Close();
+                e.Handled = true;
+            }
         }
     }
 }
