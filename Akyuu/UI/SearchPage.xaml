@@ -21,43 +21,54 @@
 
         <TextBlock Grid.Row="0" Text="Screenshot search:" Style="{StaticResource HeaderLabel}"/>
 
-        <GroupBox Grid.Row="2" Grid.Column="0" Header="Find by tags">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="4"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="4"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="4"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+        <TabControl Grid.Row="2" Grid.Column="0">
+            <TabItem Header="Tag Search">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="4"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="4"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="4"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                <TextBox Grid.Row="0" TextChanged="TagsFilter_TextChanged"/>
+                    <TextBox Grid.Row="0" TextChanged="TagsFilter_TextChanged"/>
 
-                <ListBox x:Name="lsTagList" Grid.Row="2">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <CheckBox Margin="0,0,4,0" IsChecked="{Binding Selected, Mode=TwoWay}"/>
-                                <TextBlock Text="{Binding Name}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
+                    <ListBox x:Name="lsTagList" Grid.Row="2">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Margin="0,0,4,0" IsChecked="{Binding Selected, Mode=TwoWay}"/>
+                                    <TextBlock Text="{Binding Name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
 
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
-                            <EventSetter Event="MouseDoubleClick" Handler="TagList_MouseDoubleClick"/>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                </ListBox>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                                <EventSetter Event="MouseDoubleClick" Handler="TagList_MouseDoubleClick"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
 
-                <Button Grid.Row="4" Padding="4" Content="Search..." Click="TagSearch_Click"/>
+                    <Button Grid.Row="4" Padding="4" Content="Search..." Click="TagSearch_Click"/>
 
-                <Button Grid.Row="6" Padding="4" Content="Show Untagged" Click="ShowUntagged_Click"/>
-            </Grid>
-        </GroupBox>
+                    <Button Grid.Row="6" Padding="4" Content="Show Untagged" Click="ShowUntagged_Click"/>
+                </Grid>
+            </TabItem>
 
+            <TabItem Header="Options">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <CheckBox x:Name="cxSortDesc" Content="Sort Descending"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
 
         <GridSplitter Grid.Row="2" Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
 

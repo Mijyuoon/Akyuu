@@ -65,8 +65,15 @@ namespace Akyuu.UI {
                             where g.Count() >= tagCount
                             select g.Key;
 
-                lsBrowser.ItemsSource = from t in files.ToList()
-                                        select Screenshot.FromFile(t);
+                if(cxSortDesc.IsChecked is true) {
+                    lsBrowser.ItemsSource = from t in files.ToList()
+                                            orderby t descending
+                                            select Screenshot.FromFile(t);
+                } else {
+                    lsBrowser.ItemsSource = from t in files.ToList()
+                                            orderby t ascending
+                                            select Screenshot.FromFile(t);
+                }
             }
         }
 
@@ -77,8 +84,15 @@ namespace Akyuu.UI {
                 var tagged = (from t in ctx.ScreenshotTags
                               select t.File).Distinct();
 
-                lsBrowser.ItemsSource = from t in files.Except(tagged)
-                                        select Screenshot.FromFile(t);
+                if(cxSortDesc.IsChecked is true) {
+                    lsBrowser.ItemsSource = from t in files.Except(tagged)
+                                            orderby t descending
+                                            select Screenshot.FromFile(t);
+                } else {
+                    lsBrowser.ItemsSource = from t in files.Except(tagged)
+                                            orderby t ascending
+                                            select Screenshot.FromFile(t);
+                }
             }
         }
 

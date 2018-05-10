@@ -39,7 +39,8 @@ namespace Akyuu {
                 string file = Path.GetFileName(e.Args[0]);
 
                 if(!File.Exists(Path.Combine(Config.ScreenshotPath, file))) {
-                    MessageBox.Show($"Invalid filename '{file}' provided, exiting.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"Invalid filename '{file}' provided, exiting.", "Error",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
                     Environment.Exit(-1);
                 }
 
