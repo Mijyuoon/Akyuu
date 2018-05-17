@@ -16,6 +16,6 @@
 
         <TextBlock Grid.Row="0" Text="Browse:" Style="{StaticResource HeaderLabel}"/>
 
-        <akyuu:ScreenshotBrowser Grid.Row="2" ItemsSource="{Binding Images}" OpenScreenshot="Browser_OpenScreenshot"/>
+        <akyuu:ScreenshotBrowser Grid.Row="2" ItemsSource="{Binding Images}"/>
     </Grid>
 </Page>

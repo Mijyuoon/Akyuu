@@ -72,6 +72,6 @@
 
         <GridSplitter Grid.Row="2" Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
 
-        <akyuu:ScreenshotBrowser x:Name="lsBrowser" Grid.Row="2" Grid.Column="2" OpenScreenshot="Browser_OpenScreenshot"/>
+        <akyuu:ScreenshotBrowser x:Name="lsBrowser" Grid.Row="2" Grid.Column="2"/>
     </Grid>
 </Page>

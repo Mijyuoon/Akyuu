@@ -44,13 +44,15 @@
         <ListBox x:Name="lsTags" Grid.Row="4" Grid.ColumnSpan="3" ItemsSource="{Binding Tags}">
             <ListBox.Resources>
                 <ContextMenu x:Key="TagItemMenu">
-                    <MenuItem Header="Remove" Click="RemoveTags_Click"/>
+                    <MenuItem Header="Remove (Del)" Click="RemoveTags_Click"/>
                 </ContextMenu>
             </ListBox.Resources>
             
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="ContextMenu" Value="{StaticResource TagItemMenu}"/>
+
+                    <EventSetter Event="KeyDown" Handler="TagList_KeyDown"/>
                 </Style>
             </ListBox.ItemContainerStyle>
             

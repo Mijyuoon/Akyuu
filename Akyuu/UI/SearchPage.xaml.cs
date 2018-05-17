@@ -47,11 +47,6 @@ namespace Akyuu.UI {
             }
         }
 
-        private void Browser_OpenScreenshot(object sender, Components.OpenScreenshotEventArgs e) {
-            var window = new ImageViewWindow(e.Screenshot);
-            window.ShowDialog(Application.Current.MainWindow);
-        }
-
         private void TagSearch_Click(object sender, RoutedEventArgs e) {
             var tagName = from t in allTags
                           where t.Selected

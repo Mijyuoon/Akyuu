@@ -30,10 +30,5 @@ namespace Akyuu.UI {
             Images = from t in Utils.ListImageFiles(Config.ScreenshotPath)
                      select Screenshot.FromFile(t);
         }
-
-        private void Browser_OpenScreenshot(object sender, Components.OpenScreenshotEventArgs e) {
-            var window = new ImageViewWindow(e.Screenshot);
-            window.ShowDialog(Application.Current.MainWindow);
-        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,24 @@ namespace Akyuu.Misc {
             from t in Directory.EnumerateFiles(path, "*.*")
             where imageExtensions.Contains(Path.GetExtension(t))
             select Path.GetFileName(t);
+
+        public static void ShowInExplorer(string path) {
+            path = Path.GetFullPath(path);
+
+            Process.Start(new ProcessStartInfo {
+                FileName = "explorer.exe",
+                Arguments = $"/select,\"{path}\"",
+            });
+        }
+
+        public static void OpenFileDefault(string path) {
+            path = Path.GetFullPath(path);
+
+            Process.Start(new ProcessStartInfo {
+                FileName = path,
+                UseShellExecute = true,
+            });
+        }
     }
 
     public static class Extensions {

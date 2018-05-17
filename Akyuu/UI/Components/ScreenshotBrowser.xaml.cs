@@ -1,4 +1,5 @@
-﻿using Akyuu.Models;
+﻿using Akyuu.Misc;
+using Akyuu.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,10 +41,13 @@ namespace Akyuu.UI.Components {
         public static readonly DependencyProperty ThumbnailSizeProperty =
             DependencyProperty.Register("ThumbnailSize", typeof(int), typeof(ScreenshotBrowser), new PropertyMetadata(64));
 
-        public event EventHandler<OpenScreenshotEventArgs> OpenScreenshot;
-
         public ScreenshotBrowser() {
             InitializeComponent();
+        }
+
+        private void ShowImageViewWindow(Screenshot screenshot) {
+            var window = new ImageViewWindow(screenshot);
+            window.ShowDialog(Application.Current.MainWindow);
         }
 
         private void Browser_DoubleClick(object sender, MouseButtonEventArgs e) {
@@ -52,17 +56,41 @@ namespace Akyuu.UI.Components {
 
             var item = sender as ListBoxItem;
             if(item.Content is Screenshot data) {
-                OpenScreenshot?.Invoke(this, new OpenScreenshotEventArgs(data));
+                ShowImageViewWindow(data);
             }
         }
 
         private void Browser_KeyDown(object sender, KeyEventArgs e) {
-            if(e.Key != Key.Enter) return;
+            if(e.Key != Key.Enter && e.Key != Key.F && e.Key != Key.D) return;
             e.Handled = true;
 
             var item = sender as ListBoxItem;
             if(item.Content is Screenshot data) {
-                OpenScreenshot?.Invoke(this, new OpenScreenshotEventArgs(data));
+                switch(e.Key) {
+                case Key.Enter:
+                    ShowImageViewWindow(data);
+                    break;
+                case Key.F:
+                    Utils.OpenFileDefault(data.Source.AbsolutePath);
+                    break;
+                case Key.D:
+                    Utils.ShowInExplorer(data.Source.AbsolutePath);
+                    break;
+                }
+            }
+        }
+
+        private void OpenFile_Click(object sender, RoutedEventArgs e) {
+            var item = sender as FrameworkElement;
+            if(item.DataContext is Screenshot data) {
+                Utils.OpenFileDefault(data.Source.AbsolutePath);
+            }
+        }
+
+        private void OpenDir_Click(object sender, RoutedEventArgs e) {
+            var item = sender as FrameworkElement;
+            if(item.DataContext is Screenshot data) {
+                Utils.ShowInExplorer(data.Source.AbsolutePath);
             }
         }
     }

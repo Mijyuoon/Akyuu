@@ -8,6 +8,13 @@
              d:DesignHeight="450" d:DesignWidth="800">
     
     <ListBox ItemsSource="{Binding ItemsSource, ElementName=root}">
+        <ListBox.Resources>
+            <ContextMenu x:Key="ImageItemMenu">
+                <MenuItem Header="Open File (F)" Click="OpenFile_Click"/>
+                <MenuItem Header="Open Directory (D)" Click="OpenDir_Click"/>
+            </ContextMenu>
+        </ListBox.Resources>
+        
         <ListBox.ItemsPanel>
             <ItemsPanelTemplate>
                 <VirtualizingStackPanel Orientation="Vertical"/>
@@ -27,6 +34,8 @@
 
         <ListBox.ItemContainerStyle>
             <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                <Setter Property="ContextMenu" Value="{StaticResource ImageItemMenu}"/>
+
                 <EventSetter Event="MouseDoubleClick" Handler="Browser_DoubleClick"/>
                 <EventSetter Event="KeyDown" Handler="Browser_KeyDown"/>
             </Style>

@@ -79,7 +79,8 @@ namespace Akyuu.UI {
         }
 
         private void RemoveTags_Click(object sender, RoutedEventArgs e) {
-            if(lsTags.SelectedItem is ScreenshotTag tag) {
+            var item = sender as FrameworkElement;
+            if(item.DataContext is ScreenshotTag tag) {
                 Tags.Remove(tag);
             }
         }
@@ -88,6 +89,16 @@ namespace Akyuu.UI {
             if(e.Key == Key.Escape) {
                 Close();
                 e.Handled = true;
+            }
+        }
+
+        private void TagList_KeyDown(object sender, KeyEventArgs e) {
+            if(e.Key != Key.Delete) return;
+            e.Handled = true;
+
+            var item = sender as FrameworkElement;
+            if(item.DataContext is ScreenshotTag tag) {
+                Tags.Remove(tag);
             }
         }
     }
