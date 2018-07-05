@@ -17,21 +17,31 @@ using System.Windows.Shapes;
 
 namespace Akyuu.UI {
     public partial class TagListPage : Page {
-        public IEnumerable<TagInfo> Tags { get; }
+        private IEnumerable<TagInfo> allTags;
 
         public TagListPage() {
             InitializeComponent();
             DataContext = this;
 
             using(var ctx = AkyuuContext.Create()) {
-                Tags = (from t in ctx.ScreenshotTags
-                       group t by t.TagName into g
-                       orderby g.Key
-                       select new TagInfo {
-                           Name = g.Key,
-                           Count = g.Count(),
-                       }).ToList();
+                allTags = (from t in ctx.ScreenshotTags
+                           group t by t.TagName into g
+                           orderby g.Key
+                           select new TagInfo {
+                               Name = g.Key,
+                               Count = g.Count(),
+                           }).ToList();
             }
+
+            lsTags.ItemsSource = allTags;
+        }
+
+        private void TagFilter_TextChanged(object sender, TextChangedEventArgs e) {
+            var text = (sender as TextBox).Text;
+
+            lsTags.ItemsSource = from t in allTags
+                                 where t.Name.Contains(text)
+                                 select t;
         }
     }
 }

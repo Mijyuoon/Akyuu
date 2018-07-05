@@ -21,14 +21,24 @@ namespace Akyuu.UI {
     public partial class BrowsePage : Page {
         public Config Config => Config.Current;
 
-        public IEnumerable<Screenshot> Images { get; }
+        private IEnumerable<Screenshot> allFiles;
 
         public BrowsePage() {
             InitializeComponent();
             DataContext = this;
 
-            Images = from t in Utils.ListImageFiles(Config.ScreenshotPath)
-                     select Screenshot.FromFile(t);
+            allFiles = from t in Utils.ListImageFiles(Config.ScreenshotPath)
+                       select Screenshot.FromFile(t);
+
+            lsFiles.ItemsSource = allFiles;
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e) {
+            var text = (sender as TextBox).Text;
+
+            lsFiles.ItemsSource = from t in allFiles
+                                  where t.File.Contains(text)
+                                  select t;
         }
     }
 }

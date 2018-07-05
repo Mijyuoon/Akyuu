@@ -11,11 +11,15 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="10"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="4"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Text="Browse:" Style="{StaticResource HeaderLabel}"/>
 
-        <akyuu:ScreenshotBrowser Grid.Row="2" ItemsSource="{Binding Images}"/>
+        <TextBox Grid.Row="2" TextChanged="TextBox_TextChanged"/>
+
+        <akyuu:ScreenshotBrowser x:Name="lsFiles" Grid.Row="4"/>
     </Grid>
 </Page>

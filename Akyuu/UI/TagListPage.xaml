@@ -11,12 +11,16 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="10"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="4"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <TextBlock  Grid.Row="0" Text="Tag list:" Style="{StaticResource HeaderLabel}"/>
 
-        <DataGrid Grid.Row="2" ItemsSource="{Binding Tags}"
+        <TextBox Grid.Row="2" TextChanged="TagFilter_TextChanged"/>
+
+        <DataGrid x:Name="lsTags" Grid.Row="4"
                   AutoGenerateColumns="False" IsReadOnly="True"
                   SelectionMode="Single" SelectionUnit="FullRow">
             <DataGrid.Columns>
