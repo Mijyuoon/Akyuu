@@ -98,6 +98,8 @@
     </ApplicationDefinition>
     <Compile Include="Data\SQLiteConfiguration.cs" />
     <Compile Include="Data\AkyuuContext.cs" />
+    <Compile Include="Filter\ScreenshotFilter.cs" />
+    <Compile Include="Filter\ScreenshotFilterAction.cs" />
     <Compile Include="Misc\Utils.cs" />
     <Compile Include="Models\DB\ScreenshotTag.cs" />
     <Compile Include="Models\NavigationPage.cs" />

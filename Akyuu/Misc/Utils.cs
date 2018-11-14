@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace Akyuu.Misc {
     public static class Utils {
@@ -37,6 +39,13 @@ namespace Akyuu.Misc {
                 UseShellExecute = true,
             });
         }
+
+        public static void ImageFileToClipboard(string path) {
+            path = Path.GetFullPath(path);
+
+            var uri = new Uri(path, UriKind.Absolute);
+            Clipboard.SetImage(new BitmapImage(uri));
+        }
     }
 
     public static class Extensions {
@@ -47,6 +56,11 @@ namespace Akyuu.Misc {
 
         public static bool HasModifier(this KeyEventArgs e, ModifierKeys modifier) {
             return (e.KeyboardDevice.Modifiers & modifier) == modifier;
+        }
+
+        public static bool ContainsCI(this string source, string value) {
+            var cinfo = CultureInfo.InvariantCulture.CompareInfo;
+            return cinfo.IndexOf(source, value, CompareOptions.IgnoreCase) > -1;
         }
     }
 }

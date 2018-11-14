@@ -61,33 +61,39 @@ namespace Akyuu.UI {
                             select g.Key;
 
                 if(cxSortDesc.IsChecked is true) {
-                    lsBrowser.ItemsSource = from t in files.ToList()
-                                            orderby t descending
-                                            select Screenshot.FromFile(t);
+                    files = from t in files
+                            orderby t descending
+                            select t;
                 } else {
-                    lsBrowser.ItemsSource = from t in files.ToList()
-                                            orderby t ascending
-                                            select Screenshot.FromFile(t);
+                    files = from t in files
+                            orderby t ascending
+                            select t;
                 }
+
+                lsBrowser.ItemsSource = from t in files.ToList()
+                                        select Screenshot.FromFile(t);
             }
         }
 
         private void ShowUntagged_Click(object sender, RoutedEventArgs e) {
-            var files = Utils.ListImageFiles(Config.Current.ScreenshotPath);
-
             using(var ctx = AkyuuContext.Create()) {
                 var tagged = (from t in ctx.ScreenshotTags
                               select t.File).Distinct();
 
+                var files = Utils.ListImageFiles(Config.Current.ScreenshotPath).Except(tagged);
+
                 if(cxSortDesc.IsChecked is true) {
-                    lsBrowser.ItemsSource = from t in files.Except(tagged)
-                                            orderby t descending
-                                            select Screenshot.FromFile(t);
+                    files = from t in files
+                            orderby t descending
+                            select t;
                 } else {
-                    lsBrowser.ItemsSource = from t in files.Except(tagged)
-                                            orderby t ascending
-                                            select Screenshot.FromFile(t);
+                    files = from t in files
+                            orderby t ascending
+                            select t;
                 }
+
+                lsBrowser.ItemsSource = from t in files.ToList()
+                                        select Screenshot.FromFile(t);
             }
         }
 
@@ -95,7 +101,7 @@ namespace Akyuu.UI {
             var text = (sender as TextBox).Text;
 
             lsTagList.ItemsSource = from t in allTags
-                                    where t.Name.Contains(text)
+                                    where t.Selected || t.Name.ContainsCI(text)
                                     select t;
         }
     }

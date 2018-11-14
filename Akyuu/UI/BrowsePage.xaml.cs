@@ -1,4 +1,5 @@
-﻿using Akyuu.Misc;
+﻿using Akyuu.Filter;
+using Akyuu.Misc;
 using Akyuu.Models;
 using System;
 using System.Collections.Generic;
@@ -19,15 +20,13 @@ using System.Windows.Shapes;
 
 namespace Akyuu.UI {
     public partial class BrowsePage : Page {
-        public Config Config => Config.Current;
-
         private IEnumerable<Screenshot> allFiles;
 
         public BrowsePage() {
             InitializeComponent();
             DataContext = this;
 
-            allFiles = from t in Utils.ListImageFiles(Config.ScreenshotPath)
+            allFiles = from t in Utils.ListImageFiles(Config.Current.ScreenshotPath)
                        select Screenshot.FromFile(t);
 
             lsFiles.ItemsSource = allFiles;
@@ -37,7 +36,7 @@ namespace Akyuu.UI {
             var text = (sender as TextBox).Text;
 
             lsFiles.ItemsSource = from t in allFiles
-                                  where t.File.Contains(text)
+                                  where t.File.ContainsCI(text)
                                   select t;
         }
     }

@@ -61,20 +61,24 @@ namespace Akyuu.UI.Components {
         }
 
         private void Browser_KeyDown(object sender, KeyEventArgs e) {
-            if(e.Key != Key.Enter && e.Key != Key.F && e.Key != Key.D) return;
-            e.Handled = true;
-
             var item = sender as ListBoxItem;
             if(item.Content is Screenshot data) {
                 switch(e.Key) {
                 case Key.Enter:
+                    e.Handled = true;
                     ShowImageViewWindow(data);
                     break;
                 case Key.F:
+                    e.Handled = true;
                     Utils.OpenFileDefault(data.Source.AbsolutePath);
                     break;
                 case Key.D:
+                    e.Handled = true;
                     Utils.ShowInExplorer(data.Source.AbsolutePath);
+                    break;
+                case Key.C:
+                    e.Handled = true;
+                    Utils.ImageFileToClipboard(data.Source.AbsolutePath);
                     break;
                 }
             }
@@ -91,6 +95,13 @@ namespace Akyuu.UI.Components {
             var item = sender as FrameworkElement;
             if(item.DataContext is Screenshot data) {
                 Utils.ShowInExplorer(data.Source.AbsolutePath);
+            }
+        }
+
+        private void CopyImage_Click(object sender, RoutedEventArgs e) {
+            var item = sender as FrameworkElement;
+            if(item.DataContext is Screenshot data) {
+                Utils.ImageFileToClipboard(data.Source.AbsolutePath);
             }
         }
     }

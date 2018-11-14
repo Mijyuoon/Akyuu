@@ -12,6 +12,7 @@
             <ContextMenu x:Key="ImageItemMenu">
                 <MenuItem Header="Open File (F)" Click="OpenFile_Click"/>
                 <MenuItem Header="Open Directory (D)" Click="OpenDir_Click"/>
+                <MenuItem Header="Copy Image (C)" Click="CopyImage_Click"/>
             </ContextMenu>
         </ListBox.Resources>
         
